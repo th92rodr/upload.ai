@@ -16,3 +16,11 @@ model Video {
 
   @@map("videos")
 }
+
+model Prompt {
+  id       String @id @default(uuid())
+  title    String
+  template String
+
+  @@map("prompts")
+}
