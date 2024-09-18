@@ -1,0 +1,19 @@
+{
+  "name": "upload-ai-server",
+  "version": "1.0.0",
+  "description": "",
+  "license": "BSD-3",
+  "main": "src/server.ts",
+  "engines": {
+    "node": "18.17.1",
+    "npm": "9.6.7"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "20.6.0",
+    "tsx": "3.12.8",
+    "typescript": "5.2.2"
+  }
+}
