@@ -8,6 +8,7 @@ import {
 
 import { env } from './env'
 import { errorHandler } from './error-handler'
+import { createTranscriptionRoute } from './routes/create-transcription'
 import { getAllPromptsRoute } from './routes/get-all-prompts'
 import { uploadVideoRoute } from './routes/upload-video'
 
@@ -24,6 +25,7 @@ app.setErrorHandler(errorHandler)
 
 app.register(uploadVideoRoute)
 app.register(getAllPromptsRoute)
+app.register(createTranscriptionRoute)
 
 app.listen({ port: env.PORT }).then(() => {
   console.log('HTTP server running')
