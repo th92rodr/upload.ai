@@ -1,10 +1,14 @@
-import type { FastifyInstance } from 'fastify'
+import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 
 import { prisma } from '../lib/prisma'
 
-export async function getAllPromptsRoute(app: FastifyInstance) {
-  app.get('/prompts', async () => {
-    const prompts = await prisma.prompt.findMany()
-    return { prompts }
+export const getAllPromptsRoute: FastifyPluginAsyncZod = async app => {
+  app.route({
+    method: 'GET',
+    url: '/prompts',
+    handler: async () => {
+      const prompts = await prisma.prompt.findMany()
+      return { prompts }
+    },
   })
 }
