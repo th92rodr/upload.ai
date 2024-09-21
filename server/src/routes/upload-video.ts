@@ -6,6 +6,7 @@ import { promisify } from 'node:util'
 import { fastifyMultipart } from '@fastify/multipart'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 
+import { ClientError } from '../errors/client-error'
 import { prisma } from '../lib/prisma'
 
 const pump = promisify(pipeline)
@@ -20,17 +21,17 @@ export const uploadVideoRoute: FastifyPluginAsyncZod = async app => {
   app.route({
     method: 'POST',
     url: '/videos',
-    handler: async (request, reply) => {
+    handler: async request => {
       const data = await request.file()
 
       if (!data) {
-        return reply.status(400).send({ error: 'Missing file input.' })
+        throw new ClientError('Missing file input.')
       }
 
       const extension = path.extname(data.filename)
 
       if (extension !== '.mp3') {
-        return reply.status(400).send({ error: 'Invalid file input type.' })
+        throw new ClientError('Invalid file input type.')
       }
 
       const fileBaseName = path.basename(data.filename, extension)
