@@ -7,6 +7,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './env'
+import { errorHandler } from './error-handler'
 import { getAllPromptsRoute } from './routes/get-all-prompts'
 import { uploadVideoRoute } from './routes/upload-video'
 
@@ -18,6 +19,8 @@ app.register(cors, {
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
+
+app.setErrorHandler(errorHandler)
 
 app.register(uploadVideoRoute)
 app.register(getAllPromptsRoute)
